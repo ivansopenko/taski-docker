@@ -10,6 +10,7 @@ services:
       - pg_data_production:/var/lib/postgresql/data
   backend:
     image: nsayven/taski_backend
+    pull_policy: always
     env_file: .env
     volumes:
       - static_volume:/backend_static
@@ -17,12 +18,14 @@ services:
       - db
   frontend:
     image: nsayven/taski_frontend
+    pull_policy: always
     env_file: .env
     command: cp -r /app/build/. /frontend_static/
     volumes:
       - static_volume:/frontend_static
   gateway:
     image: nsayven/taski_gateway
+    pull_policy: always
     volumes:
       - static_volume:/staticfiles
     ports:
